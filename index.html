@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Todo</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+	<div class="container">
+		<div id="tasks"> 
+			<div>
+				<h1>Tasks</h1>
+				<ol class="list-group">
+					<li v-repeat="task: tasks"
+
+						class="list-group-item" 
+					>
+						{{ task.body }}
+					</li>
+				</ol>
+			</div>
+
+			<form v-on="submit: addTask">
+				<div class="form-group">
+					<input class="form-control" placeholder="I need to ....">
+				</div>
+				<button class="btn btn-primary">Add Task</button>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
+	<script src="app.js"></script>
+
+</body>
+</html>
