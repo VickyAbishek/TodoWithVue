@@ -3,37 +3,62 @@
 <head>
 	<title>Vue Todo</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
 
 	<div class="container">
 		<div id="tasks"> 
-			<div>
-				<h1>Tasks</h1>
+			<div v-show="inCompleteTasks.length">
+				<h1>Tasks ({{ inCompleteTasks.length }})</h1>
 				<ol class="list-group">
-					<li v-repeat="task: tasks"
-
+					<li v-repeat="task: tasks | inProgress"
 						class="list-group-item" 
 					>
-						{{ task.body }}
+						<span v-on="dblclick: editTask(task)">{{ task.body }}</span>
+
+						<button v-on="click: removeTask(task)" class="delete_btn">X</button>
+						<button v-on="click: completeTask(task)" class="done_btn">&#10004</button>
 					</li>
 				</ol>
 			</div>
 
 			<form v-on="submit: addTask">
 				<div class="form-group">
-					<input class="form-control" placeholder="I need to ....">
+					<input 
+					v-el="edit_input_v_el"
+					v-model="newTask"
+					class="form-control" placeholder="I need to ....">
 				</div>
 				<button class="btn btn-primary">Add Task</button>
+				<button 
+				v-on="click: completeAllTasks"
+				class="btn btn-default">Mark All as Complete</button>
 			</form>
+
+			<div v-if="completedTasks.length">
+				<h1>Completed ({{ completedTasks.length }})</h1>
+				<ol class="list-group">
+					<!-- <li v-repeat="task: tasks | completedTasks" -->
+					<li v-repeat="task: tasks | filterBy true in completed"
+					class="list-group-item">
+						{{ task.body }}
+
+					<button 
+					v-on="click: redoTask(task)"
+					class="redo_btn">X</button>
+					</li>
+				</ol>
+				<button class="btn btn-danger"
+				v-on="click: clearCompleted">Clear Completed</button>
+			</div>
+
+			<pre style="margin-top: 15px;"> {{ $data | json }} </pre>
 		</div>
 	</div>
 
-
-
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
-	<script src="app.js"></script>
+	<script src="scripts/app.js"></script>
 
 </body>
 </html>

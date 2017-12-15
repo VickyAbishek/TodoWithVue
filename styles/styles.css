@@ -1,0 +1,29 @@
+.delete_btn
+{
+	border: none;
+	float: 	right;
+	color:	white;
+	background: red;
+}
+
+.done_btn
+{
+	border: none;
+	background: lightgreen;
+	color:white;
+	float: right;
+	margin-right: 1%;
+}
+
+.redo_btn
+{
+	border: none;
+	background: red;
+	color: white;
+	float: right;
+}
+
+body
+{
+	margin-top: 5px;
+}
